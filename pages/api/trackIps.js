@@ -7,7 +7,7 @@ export default async (req, res) => {
   let IP_ADDRESS =
     headers["x-forwarded-for"] || req.connection.remoteAddress || "";
 
-  // Skipping the localhost ip address
+  // Skipping the localhost ip address and marking it as null for later removal
   if (IP_ADDRESS === "127.0.0.1" || IP_ADDRESS === "::1") {
     IP_ADDRESS = null;
   }
