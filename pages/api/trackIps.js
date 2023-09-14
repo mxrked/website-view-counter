@@ -39,7 +39,11 @@ export default async (req, res) => {
     console.log("IP_ADDRESS: " + IP_ADDRESS);
 
     if (!EXISTING_IP) {
-      await IP_COLLECTION.insertOne({ IP_ADDRESS });
+      const currentDateTime = new Date().toISOString(); // Get the current date and time in ISO format
+      await IP_COLLECTION.insertOne({
+        IP_ADDRESS,
+        added_at: currentDateTime, // Add the timestamp property here
+      });
 
       //   // Make API request to IPStack to get location information
       //   const LOCATION_INFO = await fetch(
