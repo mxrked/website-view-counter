@@ -13,7 +13,10 @@ export default async (req, res) => {
   }
 
   try {
+    // Creating the connection
     const DB = await connectToDatabase();
+
+    // Creating the collection
     const IP_COLLECTION = DB.collection("ips");
 
     // Check if the current IP address is already in the database.
