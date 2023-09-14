@@ -1,5 +1,5 @@
 // React/Next Imports
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 // Library Imports
@@ -13,6 +13,29 @@ import "../assets/styles/modules/Index/Index.module.css";
 
 export default function Home() {
   const router = useRouter();
+  const [TOTAL_UNIQUE_IPS, SET_TOTAL_UNIQUE_IPS] = useState(null);
 
-  return "";
+  useEffect(() => {
+    // Fetching the api route data
+    fetch("/api/trackIps")
+      .then((response) => response.json())
+      .then((data) => {
+        SET_TOTAL_UNIQUE_IPS(data.TOTAL_UNIQUE_IPS);
+      })
+      .catch((error) => {
+        console.error("Error: " + error);
+      });
+  }, []);
+
+  return (
+    <div>
+      <h1>Total Number of Visits</h1>
+
+      {TOTAL_UNIQUE_IPS !== null ? (
+        <p>Total: {TOTAL_UNIQUE_IPS} IPs</p>
+      ) : (
+        <p>Loading ...</p>
+      )}
+    </div>
+  );
 }

@@ -19,24 +19,24 @@ export default async (req, res) => {
     if (!EXISTING_IP) {
       await IP_COLLECTION.insertOne({ IP_ADDRESS });
 
-      // Make API request to IPStack to get location information
-      const LOCATION_INFO = await fetch(
-        `http://api.ipstack.com/${IP_ADDRESS}?access_key=6eafccee3db72681fcd3589b807c0f2e`
-      )
-        .then((response) => response.json())
-        .catch((error) => {
-          console.error(
-            `Error fetching location data for IP ${IP_ADDRESS}: ${error}`
-          );
-          return null; // Handles error gracefully
-        });
+      //   // Make API request to IPStack to get location information
+      //   const LOCATION_INFO = await fetch(
+      //     `http://api.ipstack.com/${IP_ADDRESS}?access_key=6eafccee3db72681fcd3589b807c0f2e`
+      //   )
+      //     .then((response) => response.json())
+      //     .catch((error) => {
+      //       console.error(
+      //         `Error fetching location data for IP ${IP_ADDRESS}: ${error}`
+      //       );
+      //       return null; // Handles error gracefully
+      //     });
 
-      if (LOCATION_INFO) {
-        await IP_COLLECTION.updateOne(
-          { IP_ADDRESS },
-          { $set: { location: LOCATION_INFO } }
-        );
-      }
+      //   if (LOCATION_INFO) {
+      //     await IP_COLLECTION.updateOne(
+      //       { IP_ADDRESS },
+      //       { $set: { location: LOCATION_INFO } }
+      //     );
+      //   }
     }
 
     // Getting the total count of unique IPs
