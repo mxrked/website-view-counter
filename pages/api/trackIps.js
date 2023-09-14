@@ -17,6 +17,7 @@ const fetchAWSIPRanges = async () => {
 };
 
 export default async (req, res) => {
+  const TARGET_ADDED_AT = req.query.targetAddedAt; // Getting the added_at value for each index
   const { headers } = req;
   let IP_ADDRESS =
     headers["x-forwarded-for"] || req.connection.remoteAddress || "";
@@ -67,8 +68,14 @@ export default async (req, res) => {
 
     // Removing null, Amazon Web Services (AWS) ip addresses
     const AWS_IP_RANGES = await fetchAWSIPRanges();
-    await IP_COLLECTION.deleteMany({ IP_ADDRESS: { $in: AWS_IP_RANGES } });
-    await IP_COLLECTION.deleteMany({ IP_ADDRESS: null });
+    await IP_COLLECTION.deleteMany(
+      { IP_ADDRESS: { $in: AWS_IP_RANGES } },
+      { added_at: TARGET_ADDED_AT }
+    );
+    await IP_COLLECTION.deleteMany(
+      { IP_ADDRESS: null },
+      { added_at: TARGET_ADDED_AT }
+    );
 
     // Removing 3.238.66.225 ip (I have no idea what this is. I assume it might be Netlify)
 
