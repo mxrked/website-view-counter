@@ -50,7 +50,8 @@ export default function Home() {
         <p>Loading ...</p>
       )}
 
-      <br />
+      {/**
+        <br />
       <br />
       <span>
         <h3>
@@ -60,6 +61,7 @@ export default function Home() {
           </span>
         </h3>
       </span>
+      */}
     </div>
   );
 }
