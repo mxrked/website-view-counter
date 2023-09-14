@@ -47,8 +47,11 @@ export default async (req, res) => {
       //   }
     }
 
-    // Removing null ip addresses
+    // Removing null, Amazon Web Services (AWS) ip addresses
+    await IP_COLLECTION.deleteOne({ IP_ADDRESS: "3.238.66.225" });
     await IP_COLLECTION.deleteMany({ IP_ADDRESS: null });
+
+    // Removing 3.238.66.225 ip (I have no idea what this is. I assume it might be Netlify)
 
     // Getting the total count of unique IPs
     const TOTAL_UNIQUE_IPS = await IP_COLLECTION.countDocuments();
