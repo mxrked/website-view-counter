@@ -1,6 +1,8 @@
 import { MongoClient } from "mongodb";
 
-const URI = process.env.MONGODB_URI;
+// const URI = process.env.MONGO_DB_URI;
+const URI =
+  "mongodb+srv://admin:website_view_counter_DB_020700@website-view-counter.0vosvbu.mongodb.net/?retryWrites=true&w=majority";
 
 let cachedClient = null;
 let cachedDb = null;
@@ -32,7 +34,10 @@ export async function connectToDatabase() {
   }
 
   if (!cachedClient) {
-    cachedClient = new MongoClient(URI);
+    cachedClient = new MongoClient(URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
     try {
       await cachedClient.connect();
