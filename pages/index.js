@@ -50,6 +50,17 @@ export default function Home() {
         <p>Loading ...</p>
       )}
 
+      {USER_IP_ADDRESS !== null ? (
+        <div>
+          <h3>Your IP Address:</h3>
+          <span>
+            <strong>{USER_IP_ADDRESS}</strong>
+          </span>
+        </div>
+      ) : (
+        <p>Loading ...</p>
+      )}
+
       {/**
         <br />
       <br />
