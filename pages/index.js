@@ -54,7 +54,7 @@ export default function Home() {
       <br />
       <span>
         <h3>
-          Current User's IP Address:{" "}
+          Current User's IP Address:
           <span>
             <strong>{USER_IP_ADDRESS}</strong>
           </span>
