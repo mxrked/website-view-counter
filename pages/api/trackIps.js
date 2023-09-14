@@ -4,8 +4,13 @@ import { connectToDatabase } from "@/utils/mongodb-connection";
 
 export default async (req, res) => {
   const { headers } = req;
-  const IP_ADDRESS =
+  let IP_ADDRESS =
     headers["x-forwarded-for"] || req.connection.remoteAddress || "";
+
+  // Skipping the localhost ip address
+  if (IP_ADDRESS === "127.0.0.1" || IP_ADDRESS === "::1") {
+    IP_ADDRESS = null;
+  }
 
   try {
     const DB = await connectToDatabase();
@@ -38,6 +43,9 @@ export default async (req, res) => {
       //     );
       //   }
     }
+
+    // Removing null ip addresses
+    await IP_COLLECTION.deleteMany({ IP_ADDRESS: null });
 
     // Getting the total count of unique IPs
     const TOTAL_UNIQUE_IPS = await IP_COLLECTION.countDocuments();
