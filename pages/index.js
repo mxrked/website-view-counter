@@ -32,7 +32,9 @@ export default function Home() {
       <h1>Total Number of Visits</h1>
 
       {TOTAL_UNIQUE_IPS !== null ? (
-        <p>Total: {TOTAL_UNIQUE_IPS} IPs</p>
+        <p>
+          You have <strong>{TOTAL_UNIQUE_IPS}</strong> visits on this website!.
+        </p>
       ) : (
         <p>Loading ...</p>
       )}
