@@ -86,12 +86,44 @@ export default function Home() {
         <div>
           <h3>Your IP Address:</h3>
           <span>
-            <strong>{USER_IP_ADDRESS}</strong>
+            <strong id="ipAddress">NOT VISIBLE</strong>
           </span>
         </div>
       ) : (
         <p>Loading ...</p>
       )}
+
+      <button
+        style={{
+          margin: "auto",
+          marginTop: "15px",
+        }}
+        id="viewBtn"
+        onClick={(e) => {
+          e.currentTarget.style.display = "none";
+          document.getElementById("hideBtn").style.display = "flex";
+          document.getElementById("ipAddress").innerText = USER_IP_ADDRESS;
+        }}
+      >
+        View IP Address
+      </button>
+
+      <button
+        style={{
+          display: "none",
+          justifyContent: "center",
+          margin: "auto",
+          marginTop: "15px",
+        }}
+        id="hideBtn"
+        onClick={(e) => {
+          e.currentTarget.style.display = "none";
+          document.getElementById("viewBtn").style.display = "flex";
+          document.getElementById("ipAddress").innerText = `NOT VISIBLE`;
+        }}
+      >
+        Hide IP Address
+      </button>
 
       {/**
         <br />
