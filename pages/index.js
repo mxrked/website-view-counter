@@ -41,14 +41,46 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
-      <h1>Total Number of Visits</h1>
+    <div
+      style={{
+        textAlign: "center",
+        paddingTop: "35px",
+        paddingBottom: "35px",
+        paddingLeft: "20px",
+        paddingRight: "20px",
+      }}
+    >
+      <br />
+      <h1>Website Visits Counter</h1>
 
       {TOTAL_UNIQUE_IPS !== null ? (
-        <p>Total: {TOTAL_UNIQUE_IPS} visits.</p>
+        <p
+          style={{
+            fontSize: "20px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          You have{" "}
+          <span
+            style={{
+              fontSize: "30px",
+              fontWeight: "bold",
+              marginLeft: "10px",
+              marginRight: "10px",
+            }}
+          >
+            {TOTAL_UNIQUE_IPS}
+          </span>{" "}
+          visits.
+        </p>
       ) : (
         <p>Loading ...</p>
       )}
+
+      <br />
+      <br />
 
       {USER_IP_ADDRESS !== null ? (
         <div>
